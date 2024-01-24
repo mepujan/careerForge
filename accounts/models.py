@@ -20,6 +20,8 @@ class User(AbstractUser):
     bio = models.TextField()
     address = models.CharField(max_length=100)
     mobile = models.CharField(max_length=10)
+    role = models.CharField(
+        max_length=10, default='job-seeker', choices=USER_TYPE)
 
     def __str__(self):
         return f"{self.email} - user created."
