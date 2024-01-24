@@ -1,6 +1,7 @@
 from django.db import models
 from abstract.base import BaseModel
 from django.contrib.auth.models import User
+from django.conf import settings
 
 JOB_TYPES = (
     ('full-time', 'Full Time'),
@@ -39,7 +40,8 @@ class Job(BaseModel):
     urgently_hiring = models.BooleanField(default=False)
     base_salary = models.FloatField(default=0.0)
     company_logo = models.ImageField(upload_to='company_logo')
-    hiring_person = models.ForeignKey(User, on_delete=models.CASCADE)
+    hiring_person = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-updated',)
