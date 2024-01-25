@@ -1,6 +1,5 @@
 from django.db import models
 from abstract.base import BaseModel
-from django.contrib.auth.models import User
 from django.conf import settings
 
 JOB_TYPES = (
