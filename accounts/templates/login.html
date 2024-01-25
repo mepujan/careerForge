@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h2 class="m-4" style="text-align: center;">Login</h2>
+<hr />
+<div class="row d-flex align-items-center justify-content-center">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            {% for message in messages %}
+
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+
+            {% endfor %}
+            <form class="m-3" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="text-center">
+                    <button class="btn btn-primary">Login</button>
+                </div>
+
+            </form>
+            <div class="m-4">
+                <p>Already have an account? <a href="#">Signup</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+</form>
