@@ -22,6 +22,8 @@ class User(AbstractUser):
     mobile = models.CharField(max_length=10)
     role = models.CharField(
         max_length=10, default='job-seeker', choices=USER_TYPE)
+    profile_pic = models.ImageField(
+        upload_to='profiles', blank=True, null=True)
 
     def __str__(self):
         return f"{self.email} - user created."
