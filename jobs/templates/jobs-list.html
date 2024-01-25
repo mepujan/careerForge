@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Available Jobs</h1>
+{%if not jobs %}
+<h1 style="text-align: center;">No Jobs Available</h1>
+{%else%}
+<h1 style="text-align: center;">Available Jobs</h1>
+<hr />
+
+<div class="container">
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{job.company_logo.url}}" class="card-img-top" alt="company logo">
+                <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="card-text">{{job.descriptions}}</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+{%endif%}
+
 
 
 {% endblock content %}
