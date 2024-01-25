@@ -11,7 +11,8 @@ JOB_TYPES = (
 
 JOB_STATUS = (
     ('active', 'active'),
-    ('inactive', 'inactive')
+    ('inactive', 'inactive'),
+    ('filled', 'filled')
 )
 
 
@@ -34,10 +35,14 @@ class Job(BaseModel):
     requirements = models.TextField()
     application_count = models.IntegerField(default=0)
     contact_email = models.EmailField()
-    status = models.CharField(max_length=9, choices=JOB_TYPES)
+    status = models.CharField(max_length=9, choices=JOB_STATUS)
     featured_job = models.BooleanField(default=False)
     urgently_hiring = models.BooleanField(default=False)
     base_salary = models.FloatField(default=0.0)
+    last_date_to_apply = models.DateField()
+    vacancy = models.IntegerField(default=1)
+    company_name = models.CharField(max_length=200, blank=True)
+    company_website = models.URLField(blank=True, null=True)
     company_logo = models.ImageField(upload_to='company_logo')
     hiring_person = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
