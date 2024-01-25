@@ -8,3 +8,4 @@ class JobListPageView(ListView):
     model = Job
     queryset = Job.objects.all()
     template_name = 'jobs-list.html'
+    context_object_name = 'jobs'
