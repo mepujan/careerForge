@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>{{job.title}}</h1>
+    <span>{{job.company_name}} {{job.type}} {{job.application_count}} applicants Posted :
+        {{job.updated | timesince}}</span>
+    <div>
+        <h2>Requirements</h2>
+        <p>{{job.requirements}}</p>
+    </div>
+    <div>
+        <h2>Job Descriptions</h2>
+        <p>{{job.descriptions}}</p>
+    </div>
+    <div>
+        <h3>Contact Informations</h3>
+        <p><a href="{{job.contact_email}}">{{job.contact_email}}</a></p>
+    </div>
+    <div>
+        <button class="btn btn-danger">Apply</button>
+    </div>
+</div>
+
+{% endblock content %}
