@@ -52,3 +52,15 @@ class Job(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.title} - job has been created."
+
+
+class JobApplication(BaseModel):
+    applicant = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applicant')
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='jobs')
+
+    def __str__(self):
+        return f"{self.applicant.username} has applied for {self.job.title}"
+
+    class Meta:
+        ordering = ('-updated',)
