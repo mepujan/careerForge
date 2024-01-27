@@ -9,6 +9,12 @@ JOB_TYPES = (
     ('permanent', 'permanent')
 )
 
+JOB_APPLICATION_STATUS = (
+    ('pending', 'Pending'),
+    ('accepted', 'Accepted'),
+    ('rejected', 'Rejected')
+)
+
 JOB_STATUS = (
     ('active', 'active'),
     ('inactive', 'inactive'),
@@ -52,3 +58,17 @@ class Job(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.title} - job has been created."
+
+
+class JobApplication(BaseModel):
+    applicant = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applicant')
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='jobs')
+    status = models.CharField(
+        max_length=8, choices=JOB_APPLICATION_STATUS, default='pending')
+
+    def __str__(self):
+        return f"{self.applicant.username} has applied for {self.job.title}"
+
+    class Meta:
+        ordering = ('-updated',)

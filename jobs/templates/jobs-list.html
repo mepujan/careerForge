@@ -4,7 +4,7 @@
 {%if not jobs %}
 <h1 style="text-align: center;">No Jobs Available</h1>
 {%else%}
-<h1 style="text-align: center;">Available Jobs</h1>
+<h1 style="text-align: center;">{{title}}</h1>
 <hr />
 
 <div class="container">
@@ -16,12 +16,32 @@
                 <div class="card-body">
                     <h5 class="card-title">{{job.title}}</h5>
                     <p class="card-text">{{job.descriptions}}</p>
-                    <a href="#" class="btn btn-primary">Learn More</a>
+                    <a href="{% url 'jobs:job-detail' job.id %}" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
         {%endfor%}
     </div>
+
+    <!-- <div class="pagination">
+        <span class="step-links">
+            {% if jobs.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ jobs.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+            </span>
+
+            {% if jobs.has_next %}
+            <a href="?page={{ jobs.next_page_number }}">next</a>
+            <a href="?page={{ jobs.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div> -->
+
+
 </div>
 
 {%endif%}

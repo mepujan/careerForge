@@ -16,7 +16,7 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'jobs:job'%}">Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'jobs:my_jobs'%}">My Jobs</a>
                 </li>
 
 
@@ -31,8 +31,18 @@
                 <a href="{%url 'accounts:logout'%}" class="btn btn-danger ms-5" role="button"
                     aria-disabled="true">Logout</a>
                 {%else%}
-                <a href="{%url 'accounts:login'%}" class="btn btn-primary ms-5" role="button"
-                    aria-disabled="true">Login</a>
+                <!-- <a href="{%url 'accounts:login'%}" class="btn btn-primary ms-5" role="button"
+                    aria-disabled="true">Login</a> -->
+                <div class="dropdown me-5">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        SignUp
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'accounts:signup-employee'%}">JobSeeker</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:signup-employer'%}">Employer</a></li>
+                    </ul>
+                </div>
                 {%endif%}
             </div>
         </div>
