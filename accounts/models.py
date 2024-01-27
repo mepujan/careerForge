@@ -27,3 +27,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.email} - user created."
+
+    @property
+    def job_applied(self):
+        return self.applicant.all()

@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% for message in messages %}
+
+<div class="alert alert-primary">
+    {{ message }}
+</div>
+{%endfor%}
 <div class="container">
-    <h1>{{job.title}}</h1>
-    <span>{{job.company_name}} {{job.type}} {{job.application_count}} applicants Posted :
-        {{job.updated | timesince}}</span>
+    <div>
+        <div>
+            <h1>{{job.title}}</h1>
+            <span>{{job.company_name}} {{job.type}} {{job.application_count}} applicants Posted :
+                {{job.updated | timesince}}</span>
+        </div>
+    </div>
+
     <div>
         <h2>Requirements</h2>
         <p>{{job.requirements}}</p>
@@ -18,7 +29,11 @@
         <p><a href="{{job.contact_email}}">{{job.contact_email}}</a></p>
     </div>
     <div>
-        <button class="btn btn-danger">Apply</button>
+        {% if not applied %}
+        <a class="btn btn-outline-danger" href="{% url 'jobs:apply_job' job.id%}">Apply</a>
+        {%else%}
+        <button class="btn btn-info" disabled>Applied</button>
+        {%endif%}
     </div>
 </div>
 
