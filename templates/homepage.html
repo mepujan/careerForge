@@ -1,5 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Homepage</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="search-bar">
+                <h2 class="mb-4 mt-3 text-center">Find Your Dream Job</h2>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Job title, keywords, or company">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="mb-4 mt-3 text-center">Featured Jobs</h2>
+        <div class="row">
+            {% for job in jobs %}
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{job.company_logo.url}}" class="card-img-top" alt="company logo">
+                    <div class="card-body">
+                        <h5 class="card-title">{{job.title}}</h5>
+                        <p class="card-text">{{job.descriptions}}</p>
+                        <a href="{% url 'jobs:job-detail' job.id %}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <!-- Add more featured job cards as needed -->
+</div>
 {% endblock content %}<h1>Homepage</h1>
