@@ -1,6 +1,7 @@
 from django.db import models
 from abstract.base import BaseModel
 from django.conf import settings
+from ckeditor.fields import RichTextField
 
 JOB_TYPES = (
     ('full-time', 'Full Time'),
@@ -38,7 +39,7 @@ class Job(BaseModel):
     type = models.CharField(max_length=10, choices=JOB_TYPES)
     descriptions = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    requirements = models.TextField()
+    requirements = RichTextField()
     application_count = models.IntegerField(default=0)
     contact_email = models.EmailField()
     status = models.CharField(max_length=9, choices=JOB_STATUS)

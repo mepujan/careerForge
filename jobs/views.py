@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView
 from django.db.models import Q
-from datetime import date
+from datetime import datetime
 from .models import Job, JobApplication
 
 
@@ -20,7 +20,8 @@ class JobListPageView(ListView):
     # paginate_by = 3
 
     def get_queryset(self):
-        qs = Job.objects.filter(Q(status='active'))
+        qs = Job.objects.filter(Q(status='active') and Q(
+            last_date_to_apply__gt=datetime.now()))
         return qs
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -32,12 +33,13 @@ class JobListPageView(ListView):
 def job_detail_view(request, id):
     job = get_object_or_404(Job, id=id)
     already_applied = False
-    jobs_ = JobApplication.objects.select_related(
-        'job').filter(applicant=request.user)
-    for job_ in jobs_:
-        if job == job_.job:
-            already_applied = True
-            break
+    if request.user.is_authenticated:
+        jobs_ = JobApplication.objects.select_related(
+            'job').filter(applicant=request.user)
+        for job_ in jobs_:
+            if job == job_.job:
+                already_applied = True
+                break
     return render(request, 'job-details.html', {'job': job, 'applied': already_applied})
 
 
