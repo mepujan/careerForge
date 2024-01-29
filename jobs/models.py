@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from abstract.base import BaseModel
 from django.conf import settings
 from ckeditor.fields import RichTextField
@@ -53,6 +54,9 @@ class Job(BaseModel):
     company_logo = models.ImageField(upload_to='company_logo')
     hiring_person = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("jobs:job-detail", kwargs={"id": self.id})
 
     class Meta:
         ordering = ('-updated',)

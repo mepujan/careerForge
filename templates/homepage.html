@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{job.title}}</h5>
                         <p class="card-text">{{job.descriptions}}</p>
-                        <a href="{% url 'jobs:job-detail' job.id %}" class="btn btn-primary">Learn More</a>
+                        <a href="{{ job.get_absolute_url }}" class="btn btn-primary">Learn More</a>
                     </div>
                 </div>
             </div>
