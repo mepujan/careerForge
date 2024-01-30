@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import homepage, aboutus, contactus
+from .views import homepage, aboutus, contactus, testimonial
 
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('about/', aboutus, name='aboutus'),
     path('contact-us/', contactus, name='contactus'),
+    path('testimonial/', testimonial, name='testimonial'),
     path('jobs/', include('jobs.urls', namespace='jobs')),
     path('accounts/', include('accounts.urls', namespace='accounts'))
 

@@ -4,12 +4,16 @@ from jobs.models import Job
 
 def homepage(request):
     featured_jobs = Job.objects.filter(featured_job=True)
-    return render(request, 'homepage.html', {'jobs': featured_jobs})
+    return render(request, 'index.html', {'jobs': featured_jobs})
 
 
 def aboutus(request):
-    return render(request, 'aboutus.html')
+    return render(request, 'about.html')
 
 
 def contactus(request):
-    return render(request, 'contactus.html')
+    return render(request, 'contact.html')
+
+
+def testimonial(request):
+    return render(request, 'testimonial.html')

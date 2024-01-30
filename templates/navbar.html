@@ -1,56 +1,29 @@
-{% load static %}
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'homepage'%}">
-            <img src="{% static 'images/logo.png'%}" alt="" width="120" height="80"
-                class="d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'jobs:job'%}">Jobs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'jobs:my_jobs'%}">My Jobs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'aboutus'%}">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'contactus'%}">Contact Us</a>
-                </li>
-
-
-            </ul>
-            <div class="d-flex">
-                {% if request.user.is_authenticated %}
-
-                <a class=" navbar-brand" href="#">
-                    <img src="{{profile_pic.url}}" alt="{{request.user.username}}" width="30" class="rounded-pill">
-                    <span>{{request.user.username}}</span>
-                </a>
-                <a href="{%url 'accounts:logout'%}" class="btn btn-danger ms-5" role="button"
-                    aria-disabled="true">Logout</a>
-                {%else%}
-                <!-- <a href="{%url 'accounts:login'%}" class="btn btn-primary ms-5" role="button"
-                    aria-disabled="true">Login</a> -->
-                <div class="dropdown me-5">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        SignUp
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{% url 'accounts:signup-employee'%}">JobSeeker</a></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:signup-employer'%}">Employer</a></li>
-                    </ul>
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="{% url 'homepage'%}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">CareerForge</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="{%url 'homepage'%}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'aboutus'%}" class="nav-item nav-link">About</a>
+            <a href="{% url 'jobs:job'%}" class="nav-item nav-link">Jobs</a>
+            <a href="{% url 'contactus'%}" class="nav-item nav-link">Contact</a>
+            <a href="{% url 'testimonial'%}" class="nav-item nav-link">Testimonial</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Register</a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="{%url 'accounts:signup-employee'%}" class="dropdown-item">Job Seeker</a>
+                    <a href="{% url 'accounts:signup-employer'%}" class="dropdown-item">Employer</a>
                 </div>
-                {%endif%}
             </div>
+
         </div>
+        <a href="{% url 'accounts:login'%}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i
+                class="fa fa-arrow-right ms-3"></i></a>
     </div>
 </nav>
+<!-- Navbar End -->

@@ -15,13 +15,13 @@ User = get_user_model()
 
 class JobListPageView(ListView):
     model = Job
-    template_name = 'jobs-list.html'
+    template_name = 'job-list.html'
     context_object_name = 'jobs'
     # paginate_by = 3
 
     def get_queryset(self):
         qs = Job.objects.filter(Q(status='active') and Q(
-            last_date_to_apply__gt=datetime.now()))
+            deadline__gt=datetime.now()))
         return qs
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:

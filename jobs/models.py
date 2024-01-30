@@ -26,6 +26,7 @@ JOB_STATUS = (
 
 class Category(BaseModel):
     title = models.CharField(max_length=200, unique=True)
+    i_class = models.CharField(max_length=300, blank=True)
 
     class Meta:
         ordering = ('-updated',)
@@ -41,13 +42,15 @@ class Job(BaseModel):
     descriptions = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     requirements = RichTextField()
+    location = models.CharField(max_length=200, blank=True)
     application_count = models.IntegerField(default=0)
     contact_email = models.EmailField()
     status = models.CharField(max_length=9, choices=JOB_STATUS)
     featured_job = models.BooleanField(default=False)
     urgently_hiring = models.BooleanField(default=False)
-    base_salary = models.FloatField(default=0.0)
-    last_date_to_apply = models.DateField()
+    min_salary = models.FloatField(default=0.0)
+    max_salary = models.FloatField(default=0.0)
+    deadline = models.DateField()
     vacancy = models.IntegerField(default=1)
     company_name = models.CharField(max_length=200, blank=True)
     company_website = models.URLField(blank=True, null=True)
