@@ -35,6 +35,15 @@ class Category(BaseModel):
     def __str__(self) -> str:
         return f"{self.title}"
 
+    @property
+    def count_vacancy(self):
+        jobs = self.job_set.all()
+        print(jobs)
+        count = 0
+        for job in jobs:
+            count += job.vacancy
+        return count
+
 
 class Job(BaseModel):
     title = models.CharField(max_length=200)
