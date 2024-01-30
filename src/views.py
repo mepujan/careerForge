@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from jobs.models import Job
+from jobs.models import Job, Category
 
 
 def homepage(request):
-    featured_jobs = Job.objects.filter(featured_job=True)
-    return render(request, 'index.html', {'jobs': featured_jobs})
+    categories = Category.objects.all()
+    return render(request, 'index.html', {'categories': categories})
 
 
 def aboutus(request):

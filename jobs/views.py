@@ -40,7 +40,7 @@ def job_detail_view(request, id):
             if job == job_.job:
                 already_applied = True
                 break
-    return render(request, 'job-details.html', {'job': job, 'applied': already_applied})
+    return render(request, 'job-detail.html', {'job': job, 'applied': already_applied})
 
 
 @login_required(login_url='/accounts/login')
@@ -65,4 +65,4 @@ def my_jobs_list(request):
 
     for job_ in jobs_applied:
         jobs.append(job_.job)
-    return render(request, 'jobs-list.html', {'jobs': jobs, 'title': 'My Jobs'})
+    return render(request, 'job-list.html', {'jobs': jobs, 'title': 'My Jobs'})
