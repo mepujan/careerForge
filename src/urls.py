@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import homepage
+from .views import homepage, aboutus, contactus
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
+    path('about/', aboutus, name='aboutus'),
+    path('contact-us/', contactus, name='contactus'),
     path('jobs/', include('jobs.urls', namespace='jobs')),
     path('accounts/', include('accounts.urls', namespace='accounts'))
 

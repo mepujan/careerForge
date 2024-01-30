@@ -15,24 +15,24 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="container">
-        <h2 class="mb-4 mt-3 text-center">Featured Jobs</h2>
-        <div class="row">
-            {% for job in jobs %}
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{job.company_logo.url}}" class="card-img-top" alt="company logo">
-                    <div class="card-body">
-                        <h5 class="card-title">{{job.title}}</h5>
-                        <p class="card-text">{{job.descriptions}}</p>
-                        <a href="{{ job.get_absolute_url }}" class="btn btn-primary">Learn More</a>
-                    </div>
+
+<div class="container">
+    <h2 class="mb-4 mt-5 text-center">Featured Jobs</h2>
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{job.company_logo.url}}" class="card-img-top" alt="company logo">
+                <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="card-text">{{job.descriptions}}</p>
+                    <a href="{{ job.get_absolute_url }}" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
-            {%endfor%}
         </div>
+        {%endfor%}
     </div>
-    <!-- Add more featured job cards as needed -->
 </div>
 {% endblock content %}<h1>Homepage</h1>
