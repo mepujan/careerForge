@@ -7,6 +7,7 @@ from django.views.generic import ListView
 from django.db.models import Q
 from datetime import datetime
 from .models import Job, JobApplication
+from .forms import SearchForm
 
 
 User = get_user_model()
@@ -66,3 +67,18 @@ def my_jobs_list(request):
     for job_ in jobs_applied:
         jobs.append(job_.job)
     return render(request, 'job-list.html', {'jobs': jobs, 'title': 'My Jobs'})
+
+
+def search_job(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        print('form valid ->', form.is_valid())
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            category = form.cleaned_data.get('category')
+            location = form.cleaned_data.get('location')
+            jobs = Job.objects.filter(Q(title__icontains=title) and Q(category=category) and Q(location__icontains=location) and Q(status='active') and Q(
+                deadline__gt=datetime.now()))
+            return render(request, 'index.html', {'jobs': jobs})
+        messages.error(request, 'Something went wrong. Try Again')
+        return render(request, 'index.html')
