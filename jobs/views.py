@@ -78,11 +78,11 @@ def search_job(request):
             title = form.cleaned_data.get('title')
             category = form.cleaned_data.get('category')
             location = form.cleaned_data.get('location')
-            jobs = Job.objects.filter(Q(title__icontains=title) and Q(category=category) and Q(location__icontains=location) and Q(status='active') and Q(
+            jobs = Job.objects.filter(Q(title__icontains=title), Q(category=category), Q(location__icontains=location), Q(status='active'), Q(
                 deadline__gt=datetime.now()))
             return render(request, 'index.html', {'jobs': jobs})
         messages.error(request, 'Something went wrong. Try Again')
-        return render(request, 'index.html')
+    return render(request, 'index.html')
 
 
 class CreateJob(LoginRequiredMixin, CreateView):
