@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h2 class="m-4" style="text-align: center;">Create New Job</h2>
+<h2 class="m-4" style="text-align: center;">{{title}}</h2>
 <hr />
 <div class="row d-flex align-items-center justify-content-center">
     <div class="col-lg-6">
@@ -18,7 +18,7 @@
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 <div class="text-center">
-                    <button class="btn btn-primary">Post Job</button>
+                    <button class="btn btn-primary">{{btn_name}}</button>
                 </div>
 
             </form>

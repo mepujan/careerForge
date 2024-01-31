@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import JobListPageView,  job_detail_view, apply_job, my_jobs_list, search_job, CreateJob, ViewMyJobPosted
+from .views import (JobListPageView,  job_detail_view, apply_job, my_jobs_list, search_job,
+                    CreateJob, ViewMyJobPosted, delete_job, UpdateJob)
 from src.views import homepage
 app_name = 'jobs'
 
@@ -14,7 +15,10 @@ urlpatterns = [
              [
                  path('', homepage, name='dashboard'),
                  path('post-job', CreateJob.as_view(), name='post-job'),
-                 path('my-jobs', ViewMyJobPosted.as_view(), name='job-posted')
+                 path('my-jobs', ViewMyJobPosted.as_view(), name='job-posted'),
+                 path('delete-job/<int:id>/', delete_job, name='delete-job'),
+                 path('update-job/<int:pk>/',
+                      UpdateJob.as_view(), name='update-job')
              ]
          )
          ),

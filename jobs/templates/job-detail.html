@@ -47,8 +47,8 @@
                 {%else%}
                 <div class="">
                     <h4 class="mb-4">Actions</h4>
-                    <a class="btn btn-info" href="{%url 'jobs:apply_job' job.id%}">Update</a>
-                    <button class="btn btn-danger" disabled>Delete</button>
+                    <a class="btn btn-info" href="{%url 'jobs:update-job' job.id%}">Update</a>
+                    <a href="{% url 'jobs:delete-job' job.id %}" class="btn btn-danger">Delete</a>
                 </div>
                 {%endif%}
             </div>

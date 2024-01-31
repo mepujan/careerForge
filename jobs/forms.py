@@ -13,3 +13,9 @@ class PostJobForm(ModelForm):
     class Meta:
         model = Job
         exclude = ('application_count', 'hiring_person', 'status')
+
+
+class UpdateJobForm(ModelForm):
+    class Meta:
+        model = Job
+        exclude = ('application_count', 'hiring_person')
