@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Job, Category, JobApplication
 
 admin.site.site_header = "CareerForge"
