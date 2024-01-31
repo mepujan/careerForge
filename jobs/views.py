@@ -1,5 +1,6 @@
 from typing import Any
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -84,7 +85,7 @@ def search_job(request):
         return render(request, 'index.html')
 
 
-class CreateJob(CreateView):
+class CreateJob(LoginRequiredMixin, CreateView):
     model = Job
     form_class = PostJobForm
     template_name = 'post-job.html'
@@ -92,8 +93,26 @@ class CreateJob(CreateView):
     success_url = reverse_lazy('jobs:myjobs')
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, files=request.FILES)
+        form = self.form_class(self.request.POST, files=self.request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('jobs:myjobs')
+            instance = form.save(commit=False)
+            instance.hiring_person = self.request.user
+            instance.save()
+            return redirect('jobs:my_jobs')
         return render(request, 'post-job.html', {'form': form})
+
+
+class ViewMyJobPosted(ListView):
+    model = Job
+    template_name = 'job-list.html'
+    context_object_name = 'jobs'
+    # paginate_by = 3
+
+    def get_queryset(self):
+        qs = Job.objects.filter(hiring_person=self.request.user)
+        return qs
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Jobs Posted'
+        return context

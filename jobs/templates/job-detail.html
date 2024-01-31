@@ -35,7 +35,7 @@
                     <h4 class="mb-3">Requirements</h4>
                     {{job.requirements | safe}}
                 </div>
-
+                {% if request.user.role == 'job-seeker'%}
                 <div class="">
                     <h4 class="mb-4">Apply For The Job</h4>
                     {% if not applied %}
@@ -44,6 +44,13 @@
                     <button class="btn btn-info" disabled>Already Applied</button>
                     {%endif%}
                 </div>
+                {%else%}
+                <div class="">
+                    <h4 class="mb-4">Actions</h4>
+                    <a class="btn btn-info" href="{%url 'jobs:apply_job' job.id%}">Update</a>
+                    <button class="btn btn-danger" disabled>Delete</button>
+                </div>
+                {%endif%}
             </div>
 
             <div class="col-lg-4">

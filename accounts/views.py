@@ -22,7 +22,10 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                return redirect('/')
+                if user.role == 'employer':
+                    return redirect('jobs:dashboard')
+                else:
+                    return redirect('/')
             messages.error(
                 request, "Invalid username or password. Try Again...")
 

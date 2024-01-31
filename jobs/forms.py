@@ -12,12 +12,4 @@ class SearchForm(ModelForm):
 class PostJobForm(ModelForm):
     class Meta:
         model = Job
-        exclude = ('application_count', 'hiring_person')
-
-    def save(self, commit: bool = True) -> Any:
-
-        job = super().save(commit=False)
-        job.hiring_person = self.request.user.id
-        if commit:
-            job.save()
-        return job
+        exclude = ('application_count', 'hiring_person', 'status')
