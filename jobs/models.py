@@ -89,3 +89,15 @@ class JobApplication(BaseModel):
 
     class Meta:
         ordering = ('-updated',)
+
+
+class Testimonials(BaseModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    content = models.TextField()
+
+    class Meta:
+        ordering = ('-updated',)
+
+    def __str__(self):
+        return f"{self.user.username} has posted testimonials."
