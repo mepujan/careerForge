@@ -1,13 +1,14 @@
 from typing import Any
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
 from django.db.models import Q
 from datetime import datetime
 from .models import Job, JobApplication
-from .forms import SearchForm
+from .forms import SearchForm, PostJobForm
 
 
 User = get_user_model()
@@ -72,7 +73,6 @@ def my_jobs_list(request):
 def search_job(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
-        print('form valid ->', form.is_valid())
         if form.is_valid():
             title = form.cleaned_data.get('title')
             category = form.cleaned_data.get('category')
@@ -82,3 +82,18 @@ def search_job(request):
             return render(request, 'index.html', {'jobs': jobs})
         messages.error(request, 'Something went wrong. Try Again')
         return render(request, 'index.html')
+
+
+class CreateJob(CreateView):
+    model = Job
+    form_class = PostJobForm
+    template_name = 'post-job.html'
+    context_object_name = 'form'
+    success_url = reverse_lazy('jobs:myjobs')
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('jobs:myjobs')
+        return render(request, 'post-job.html', {'form': form})
