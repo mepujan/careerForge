@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from jobs.models import Job, Category
+from jobs.models import Job, Category, Testimonials
 
 
 def homepage(request):
+    testimonials = Testimonials.objects.all()
     categories = Category.objects.all()
-    return render(request, 'index.html', {'categories': categories})
+    return render(request, 'index.html', {'categories': categories, 'testimonials': testimonials})
 
 
 def aboutus(request):
@@ -16,4 +17,5 @@ def contactus(request):
 
 
 def testimonial(request):
-    return render(request, 'testimonial.html')
+    testimonials = Testimonials.objects.all()
+    return render(request, 'testimonial.html', {'testimonials': testimonials})

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (JobListPageView,  job_detail_view, apply_job, my_jobs_list, search_job,
-                    CreateJob, ViewMyJobPosted, delete_job, UpdateJob)
+                    CreateJob, ViewMyJobPosted, delete_job, UpdateJob, PostTesimonials)
 from src.views import homepage
 app_name = 'jobs'
 
@@ -10,6 +10,8 @@ urlpatterns = [
     path('apply/<int:job_id>/', apply_job, name='apply_job'),
     path('myjobs/', my_jobs_list, name='my_jobs'),
     path('search/', search_job, name='search_job'),
+    path('create-testimonial/', PostTesimonials.as_view(),
+         name='create-testimonial'),
     path('employer/dashboard/',
          include(
              [

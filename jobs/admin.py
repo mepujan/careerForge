@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Job, Category, JobApplication
+from .models import Job, Category, JobApplication, Testimonials
 
 admin.site.site_header = "CareerForge"
 admin.site.site_title = "CareerForge"
@@ -26,6 +26,13 @@ class CategoryAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ('user', 'content')
+    list_filter = ('user',)
+    list_per_page = 20
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Job, JobAdmin)
 admin.site.register(JobApplication, JobApplicationAdmin)
+admin.site.register(Testimonials, TestimonialAdmin)

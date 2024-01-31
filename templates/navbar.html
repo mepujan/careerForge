@@ -23,7 +23,14 @@
                 </div>
             </div>
             <a href="{% url 'contactus'%}" class="nav-item nav-link">Contact</a>
-            <a href="{% url 'testimonial'%}" class="nav-item nav-link">Testimonial</a>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Testimonial</a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="{% url 'jobs:create-testimonial'%}" class="dropdown-item">Create</a>
+                    <a href="{% url 'testimonial'%}" class="dropdown-item">View</a>
+                </div>
+            </div>
 
             {% if request.user.is_anonymous %}
             <div class="nav-item dropdown">

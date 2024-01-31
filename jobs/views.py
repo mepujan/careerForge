@@ -1,6 +1,7 @@
 from typing import Any
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -8,8 +9,8 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.db.models import Q
 from datetime import datetime
-from .models import Job, JobApplication
-from .forms import SearchForm, PostJobForm, UpdateJobForm
+from .models import Job, JobApplication, Testimonials
+from .forms import SearchForm, PostJobForm, UpdateJobForm, TestimonialForm
 
 
 User = get_user_model()
@@ -131,13 +132,14 @@ class UpdateJob(LoginRequiredMixin, UpdateView):
         return context
 
 
+@login_required()
 def delete_job(request, id):
     get_object_or_404(Job, id=id).delete()
     messages.success(request, 'Job Deleted Successfully')
     return redirect('jobs:job-posted')
 
 
-class ViewMyJobPosted(ListView):
+class ViewMyJobPosted(LoginRequiredMixin, ListView):
     model = Job
     template_name = 'job-list.html'
     context_object_name = 'jobs'
@@ -151,3 +153,19 @@ class ViewMyJobPosted(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Jobs Posted'
         return context
+
+
+class PostTesimonials(LoginRequiredMixin, CreateView):
+    model = Testimonials
+    form_class = TestimonialForm
+    success_url = 'testimonial'
+    template_name = 'testimonial-form.html'
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = self.request.user
+            instance.save()
+            return redirect('testimonial')
+        return render(request, 'testimonial-form.html', {'form': form})

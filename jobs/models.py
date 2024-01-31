@@ -98,6 +98,7 @@ class Testimonials(BaseModel):
 
     class Meta:
         ordering = ('-updated',)
+        verbose_name_plural = "Testimonials"
 
     def __str__(self):
         return f"{self.user.username} has posted testimonials."
