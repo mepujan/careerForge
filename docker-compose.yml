@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  job_portal:
+    container_name: job_portal
+    build: 
+      context: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8001:8000
+                       
