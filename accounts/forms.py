@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .models import Profile
 
 User = get_user_model()
 
@@ -37,3 +38,14 @@ class JobSeekerRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class UpdateProfileForm(forms.ModelForm):
+    experience = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 10, 'cols': 80}))
+    skill = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 10, 'cols': 80}))
+
+    class Meta:
+        model = Profile
+        exclude = ('user',)

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import CreateView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationForm
+from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationForm, UpdateProfileForm
 from .models import Profile
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -113,3 +113,17 @@ def view_resume(request, id):
             response = HttpResponse(pdf_file, content_type='application/pdf')
             return response
     return render(request, '404.html')
+
+
+def update_profile(request, id):
+    profile = get_object_or_404(Profile, id=id)
+    form = UpdateProfileForm(instance=profile)
+    if request.method == "POST":
+        form = UpdateProfileForm(
+            request.POST, files=request.FILES, instance=profile)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect(f'accounts/profile/{request.user.id}')
+    return render(request, 'update-profile.html', {'form': form})

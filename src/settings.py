@@ -148,3 +148,6 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+JAZZMIN_SETTINGS = {
+    "site_logo": BASE_DIR / 'static/images/logo.png',
+}

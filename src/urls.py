@@ -23,6 +23,7 @@ from .views import homepage, aboutus, contactus, testimonial
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('jazzmin/', include('jazzmin.urls')),
     path('', homepage, name='homepage'),
     path('about/', aboutus, name='aboutus'),
     path('contact-us/', contactus, name='contactus'),

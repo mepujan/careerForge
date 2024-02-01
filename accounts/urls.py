@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import login_user, SignUpAsJobSeeker, logout_user, SignUpAsEmployee, profile, view_resume
+from .views import login_user, SignUpAsJobSeeker, logout_user, SignUpAsEmployee, profile, view_resume, update_profile
 
 app_name = 'accounts'
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path('employee-signup/', SignUpAsEmployee.as_view(), name='signup-employer'),
     path('jobseeker-signup/', SignUpAsJobSeeker.as_view(), name='signup-employee'),
     path('profile/<int:id>/', profile, name='profile'),
-    path('view-resume/<int:id>/', view_resume, name='view-resume')
+    path('view-resume/<int:id>/', view_resume, name='view-resume'),
+    path('update-profile/<int:id>/', update_profile, name='update-profile')
 ]
