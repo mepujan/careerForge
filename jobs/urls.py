@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (JobListPageView,  job_detail_view, apply_job, my_jobs_list, search_job,
-                    CreateJob, ViewMyJobPosted, delete_job, UpdateJob, PostTesimonials)
+                    CreateJob, ViewMyJobPosted, delete_job, UpdateJob, PostTesimonials, ApplicantListPageView)
 from src.views import homepage
 app_name = 'jobs'
 
@@ -20,7 +20,9 @@ urlpatterns = [
                  path('my-jobs', ViewMyJobPosted.as_view(), name='job-posted'),
                  path('delete-job/<int:id>/', delete_job, name='delete-job'),
                  path('update-job/<int:pk>/',
-                      UpdateJob.as_view(), name='update-job')
+                      UpdateJob.as_view(), name='update-job'),
+                 path('<int:pk>/applicants/',
+                      ApplicantListPageView.as_view(), name='applicant-list')
              ]
          )
          ),

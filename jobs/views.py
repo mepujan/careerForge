@@ -169,3 +169,14 @@ class PostTesimonials(LoginRequiredMixin, CreateView):
             instance.save()
             return redirect('testimonial')
         return render(request, 'testimonial-form.html', {'form': form})
+
+
+class ApplicantListPageView(ListView):
+    model = Job
+    template_name = 'applicant-list.html'
+    context_object_name = 'applicants'
+    # paginate_by = 3
+
+    def get_queryset(self):
+        qs = get_object_or_404(Job, id=self.kwargs.get('pk'))
+        return qs

@@ -70,6 +70,10 @@ class Job(BaseModel):
     def get_absolute_url(self):
         return reverse("jobs:job-detail", kwargs={"id": self.id})
 
+    @property
+    def application_received(self):
+        return self.jobs.all()
+
     class Meta:
         ordering = ('-updated',)
 
