@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationForm
 
+
 User = get_user_model()
 
 
@@ -81,3 +82,16 @@ class SignUpAsJobSeeker(CreateView):
 def logout_user(request):
     logout(request)
     return redirect('accounts:login')
+
+
+def profile(request, id):
+    try:
+        profile = User.objects.get(id=id)
+        return render(request, 'profile.html', {'profile': profile})
+    except User.DoesNotExist:
+        print("User Doesnot exist")
+
+    except User.MultipleObjectsReturned:
+        print("Multiple Objects Returned")
+    except:
+        print('Something went wrong.')

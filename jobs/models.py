@@ -38,7 +38,6 @@ class Category(BaseModel):
     @property
     def count_vacancy(self):
         jobs = self.job_set.all()
-        print(jobs)
         count = 0
         for job in jobs:
             count += job.vacancy
