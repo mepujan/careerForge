@@ -1,6 +1,6 @@
 from typing import Any
 import os
-from django.http import HttpRequest, HttpResponse, FileResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import CreateView
@@ -8,8 +8,8 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationForm, UpdateProfileForm
 from .models import Profile
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 User = get_user_model()
@@ -122,8 +122,6 @@ def update_profile(request, id):
         form = UpdateProfileForm(
             request.POST, files=request.FILES, instance=profile)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect(f'accounts/profile/{request.user.id}')
+            form.save()
+            return redirect(reverse('accounts:profile', args=[id]))
     return render(request, 'update-profile.html', {'form': form})

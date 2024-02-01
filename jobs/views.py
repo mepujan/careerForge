@@ -1,6 +1,8 @@
 from typing import Any
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
@@ -117,12 +119,13 @@ class UpdateJob(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('jobs:myjobs')
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(self.request.POST, files=self.request.FILES)
+        form = self.form_class(
+            self.request.POST, files=self.request.FILES, instance=self.get_object())
         if form.is_valid():
             instance = form.save(commit=False)
             instance.hiring_person = self.request.user
             instance.save()
-            return redirect('jobs:my_jobs')
+            return redirect('jobs:job-posted')
         return render(request, 'post-job.html', {'form': form})
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:

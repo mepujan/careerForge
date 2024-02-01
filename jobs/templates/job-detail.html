@@ -68,7 +68,9 @@
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Applied By: {{job.application_count}}</p>
                     <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Deadline: {{job.deadline}}</p>
                     <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Status:
-                        <button class="btn btn-primary btn-sm">{{job.status}}</button>
+
+                        <button
+                            class="btn {% if job.status == 'active' %}btn-primary{%else%} btn-danger{%endif%} btn-sm">{{job.status}}</button>
                     </p>
                 </div>
 
