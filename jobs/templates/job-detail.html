@@ -18,7 +18,8 @@
                     <img class="flex-shrink-0 img-fluid border rounded" src="{{job.company_logo.url}}" alt=""
                         style="width: 80px; height: 80px;">
                     <div class="text-start ps-4">
-                        <h3 class="mb-3">{{job.title}}</h3>
+                        <h3 class="mb-3">{{job.title}}
+                        </h3>
                         <span class="text-truncate me-3"><i
                                 class="fa fa-map-marker-alt text-primary me-2"></i>{{job.location}}</span>
                         <span class="text-truncate me-3"><i
@@ -66,6 +67,9 @@
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{job.type}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Applied By: {{job.application_count}}</p>
                     <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Deadline: {{job.deadline}}</p>
+                    <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Status:
+                        <button class="btn btn-primary btn-sm">{{job.status}}</button>
+                    </p>
                 </div>
 
                 <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">

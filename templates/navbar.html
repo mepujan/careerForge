@@ -1,4 +1,5 @@
-<!-- Navbar Start -->
+{% load nav_tags %}
+
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="{% url 'homepage'%}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
         <h1 class="m-0 text-primary">CareerForge</h1>
@@ -8,21 +9,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="{%url 'homepage'%}" class="nav-item nav-link active">Home</a>
-            <a href="{% url 'aboutus'%}" class="nav-item nav-link">About</a>
+            <a href="{%url 'homepage'%}" class="nav-item nav-link {% is_active 'homepage' %}">Home</a>
+            <a href="{% url 'aboutus'%}" class="nav-item nav-link {% is_active 'aboutus' %}">About</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
                     {% if request.user.is_authenticated and request.user.role == "employer"  %}
-                    <a href="{% url 'jobs:post-job'%}" class="dropdown-item">Post Job</a>
+                    <a href="{% url 'jobs:post-job'%}" class="dropdown-item {% is_active 'post-job' %}">Post Job</a>
                     <a href="{% url 'jobs:job-posted'%}" class="dropdown-item">My Jobs</a>
                     {% else %}
-                    <a href="{% url 'jobs:job'%}" class="dropdown-item">Job Lists</a>
+                    <a href="{% url 'jobs:job'%}" class="dropdown-item {% is_active 'job' %}">Job Lists</a>
                     <a href="{% url 'jobs:my_jobs'%}" class="dropdown-item">My Jobs</a>
                     {% endif %}
                 </div>
             </div>
-            <a href="{% url 'contactus'%}" class="nav-item nav-link">Contact</a>
+            <a href="{% url 'contactus'%}" class="nav-item nav-link {% is_active 'contactus' %}">Contact</a>
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Testimonial</a>
