@@ -8,11 +8,11 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{{profile.profile_pic.url}}" alt="avatar" class="rounded-circle img-fluid"
+                        <img src="{{profile.user.profile_pic.url}}" alt="avatar" class="rounded-circle img-fluid"
                             style="width: 150px;">
-                        <h5 class="my-3">{{profile.full_name}}</h5>
-                        <p class="text-muted mb-1">{{profile.bio}}</p>
-                        <p class="text-muted mb-4">{{profile.email}}</p>
+                        <h5 class="my-3">{{profile.user.full_name}}</h5>
+                        <p class="text-muted mb-1">{{profile.user.bio}}</p>
+                        <p class="text-muted mb-4">{{profile.user.email}}</p>
                     </div>
                 </div>
                 <div class="card mb-4 mb-lg-0">
@@ -22,33 +22,22 @@
             </div>
             <div class="col-lg-8">
                 <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Full Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{profile.full_name}}</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{profile.email}}</p>
-                            </div>
-                        </div>
 
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Bio</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{profile.bio}}</p>
-                            </div>
+                    <div class="card-body">
+                        <div class="mt-3">
+                            <h4>Experiences</h4>
+                            <p>{{profile.experience | safe}}</p>
+                        </div>
+                        <div class="mt-3">
+                            <h4>Skills</h4>
+                            <p>{{profile.skill | safe}}</p>
+                        </div>
+                        <div class="mt-3">
+                            <h4>Resume</h4>
+                            <a href="{% url 'accounts:view-resume' profile.id%}" target="_blank"
+                                class="btn btn-primary">View Resume</a>
+                            <a href="{{profile.resume.url}}" download class="btn btn-warning">Download
+                                Resume</a>
                         </div>
 
                     </div>

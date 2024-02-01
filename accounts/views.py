@@ -1,11 +1,15 @@
 from typing import Any
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+import os
+from django.http import HttpRequest, HttpResponse, FileResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import CreateView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationForm
+from .models import Profile
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 User = get_user_model()
@@ -79,14 +83,17 @@ class SignUpAsJobSeeker(CreateView):
         return context
 
 
+@login_required()
 def logout_user(request):
     logout(request)
     return redirect('accounts:login')
 
 
+@login_required()
 def profile(request, id):
     try:
-        profile = User.objects.get(id=id)
+        user = User.objects.get(id=id)
+        profile = Profile.objects.get(user=user)
         return render(request, 'profile.html', {'profile': profile})
     except User.DoesNotExist:
         print("User Doesnot exist")
@@ -95,3 +102,14 @@ def profile(request, id):
         print("Multiple Objects Returned")
     except:
         print('Something went wrong.')
+
+
+@login_required()
+def view_resume(request, id):
+    profile = get_object_or_404(Profile, id=id)
+    file_path = profile.resume.path
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as pdf_file:
+            response = HttpResponse(pdf_file, content_type='application/pdf')
+            return response
+    return render(request, '404.html')
