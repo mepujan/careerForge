@@ -8,5 +8,5 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - 8001:8000
+      - 80:8000
                        
