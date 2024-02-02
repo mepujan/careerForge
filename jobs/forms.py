@@ -1,7 +1,7 @@
 from typing import Any
 from django import forms
 from django.forms import ModelForm
-from .models import Job, Testimonials
+from .models import Job, Testimonials, JobApplication
 
 
 class SearchForm(ModelForm):
@@ -32,3 +32,9 @@ class TestimonialForm(ModelForm):
     class Meta:
         model = Testimonials
         exclude = ('user',)
+
+
+class ApplicationStatusForm(ModelForm):
+    class Meta:
+        model = JobApplication
+        exclude = ('job', 'applicant')

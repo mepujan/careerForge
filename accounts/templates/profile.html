@@ -27,12 +27,25 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-8">
+                <div style="position: relative; bottom: 20px; left: 550px;">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Application Status
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" name='accept' value='accepted' href="#">Accept</a></li>
+                            <li><a class="dropdown-item" name="reject" value='rejected' href="#">Reject</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="card mb-4">
 
                     <div class="card-body">
                         <div class="mt-3">
-                            <h4>Experiences</h4>
+                            <h4>Experience</h4>
                             <p>{{profile.experience | safe}}</p>
                         </div>
                         <div class="mt-3">

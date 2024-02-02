@@ -1,8 +1,6 @@
 from typing import Any
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.base import Model as Model
-from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
@@ -12,7 +10,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from datetime import datetime
 from .models import Job, JobApplication, Testimonials
-from .forms import SearchForm, PostJobForm, UpdateJobForm, TestimonialForm
+from .forms import SearchForm, PostJobForm, UpdateJobForm, TestimonialForm, ApplicationStatusForm
 
 
 User = get_user_model()
@@ -183,3 +181,11 @@ class ApplicantListPageView(ListView):
     def get_queryset(self):
         qs = get_object_or_404(Job, id=self.kwargs.get('pk'))
         return qs
+
+
+class ApplicationStatusUpdateView(UpdateView):
+    model = JobApplication
+    form_class = ApplicationStatusForm
+    success_url = reverse_lazy('/')
+    context_object_name = 'form'
+    template_name = 'profile.html'
