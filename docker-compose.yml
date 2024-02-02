@@ -1,12 +1,22 @@
-version: '3.1'
+version: '3.2'
 services:
-  job_portal:
-    container_name: job_portal
-    build: 
+  django_gunicorn:
+    env_file:
+      - .env
+    build:
       context: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/usr/src/app
     ports:
-      - 80:8000
-                       
+      - "8000:8000"
+    volumes:
+      - static:/usr/src/app/staticfiles
+
+  nginx:
+    build: ./ngnix
+    volumes:
+      - static:/usr/src/app/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+volumes:
+  static:
