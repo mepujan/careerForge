@@ -18,7 +18,7 @@ COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
 # Switch to root to set execute permission
 USER root
-RUN chmod +x /usr/src/app/entrypoint.sh
+RUN ["chmod", "+x", "/usr/src/app/entrypoint.sh"]
 
 # Copy the rest of the application code
 COPY . /usr/src/app/
