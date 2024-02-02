@@ -17,7 +17,6 @@ RUN pip install -r requirements.txt
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
 # Switch to root to set execute permission
-USER root
 RUN ["chmod", "+x", "/usr/src/app/entrypoint.sh"]
 
 # Copy the rest of the application code
