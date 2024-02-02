@@ -20,9 +20,6 @@ COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 USER root
 RUN chmod +x /usr/src/app/entrypoint.sh
 
-# Switch back to non-root user
-USER python
-
 # Copy the rest of the application code
 COPY . /usr/src/app/
 
