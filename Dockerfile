@@ -13,9 +13,15 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app/
 RUN pip install -r requirements.txt
 
-# Copy entrypoint script and give execute permission
+# Copy entrypoint script
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+
+# Switch to root to set execute permission
+USER root
 RUN chmod +x /usr/src/app/entrypoint.sh
+
+# Switch back to non-root user
+USER python
 
 # Copy the rest of the application code
 COPY . /usr/src/app/
