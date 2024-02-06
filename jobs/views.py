@@ -63,13 +63,10 @@ def apply_job(request, job_id):
 
 @login_required(login_url='/accounts/login')
 def my_jobs_list(request):
-    jobs_applied = JobApplication.objects.select_related(
+    applications = JobApplication.objects.select_related(
         'job').filter(applicant=request.user)
-    jobs = []
 
-    for job_ in jobs_applied:
-        jobs.append(job_.job)
-    return render(request, 'job-list.html', {'jobs': jobs, 'title': 'My Jobs'})
+    return render(request, 'my-job-list.html', {'applications': applications, 'title': 'My Jobs'})
 
 
 def search_job(request):
