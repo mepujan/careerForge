@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -152,3 +154,21 @@ CKEDITOR_CONFIGS = {
 JAZZMIN_SETTINGS = {
     "site_logo": BASE_DIR / 'static/images/logo.png',
 }
+
+# # Email Configuration
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+# AWS_SES_REGION_NAME = os.getenv('AWS_REGION')
+# AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
+
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_ACCESS_PASS')
+
+
+# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # or the port your SMTP server uses
+EMAIL_USE_TLS = True  # Set to False if your server uses SSL
+EMAIL_HOST_USER = os.getenv('EMAIL')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
