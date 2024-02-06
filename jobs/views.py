@@ -53,10 +53,10 @@ def apply_job(request, job_id):
         job_ = get_object_or_404(Job, id=job_id)
         JobApplication.objects.create(
             applicant=request.user, job=job_)
-        job_.application_count += 1
         job_.save()
         messages.success(request, "Job Applied.")
-    except:
+    except Exception as e:
+        print(e)
         messages.error(request, 'Something went wrong. Try Again later...')
     return redirect('jobs:job-detail', id=job_id)
 
@@ -189,3 +189,7 @@ class ApplicationStatusUpdateView(UpdateView):
     success_url = reverse_lazy('/')
     context_object_name = 'form'
     template_name = 'profile.html'
+
+
+# def change_application_update(request, job_id):
+#     job = get_object_or_404(JobApplication, job_id)

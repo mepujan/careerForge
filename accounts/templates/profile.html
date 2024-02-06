@@ -29,6 +29,7 @@
             </div>
 
             <div class="col-lg-8">
+                {% if request.user.role == 'employer' %}
                 <div style="position: relative; bottom: 20px; left: 550px;">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -41,6 +42,7 @@
                         </ul>
                     </div>
                 </div>
+                {%endif%}
                 <div class="card mb-4">
 
                     <div class="card-body">

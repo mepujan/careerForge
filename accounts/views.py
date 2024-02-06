@@ -10,6 +10,8 @@ from .forms import LoginForm, EmployeeRegistrationForm, JobSeekerRegistrationFor
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from jobs.models import JobApplication
+from django.db.models import Q
 
 
 User = get_user_model()
