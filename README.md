@@ -45,16 +45,23 @@ improving the hiring accuracy and reducing time-to-fill positions
 
    `pip install -r requirements.txt`
 
-5. Run the migrations command:
+5. Create .env file and add the following to the file
+
+   - DEBUG = True or false
+   - SECRET_KEY = django_secret_key
+   - EMAIL_PASSWORD = email_password
+   - EMAIL = youremail@gmail.com
+
+6. Run the migrations command:
    - `python manage.py makemigrations`
    - `python manage.py migrate`
-6. Create the superuser using command:
+7. Create the superuser using command:
    - `python manage.py createsuperuser`
-7. Run the server using command:
+8. Run the server using command:
 
    `python manage.py runserver`
 
-8. Run from docker compose using command:
+9. Run from docker compose using command:
    - `docker-compose up --build`
    - `docker-compose up -d --build` (To run in detach mode)
 
