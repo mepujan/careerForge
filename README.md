@@ -32,7 +32,9 @@ improving the hiring accuracy and reducing time-to-fill positions
 ## Setting up the project
 
 1. Clone the project using command:
+
    `git clone https://github.com/mepujan/careerForge.git`
+
 2. Create virtual environment using command:
    - `python -m venv venv` (for windows)
    - `python3 -m venv venv` (for mac/linux)
@@ -40,32 +42,36 @@ improving the hiring accuracy and reducing time-to-fill positions
    - For Windows: `venv/Scripts/activate`
    - For MAC/Linux: `source venv/bin/activate`
 4. Install all the package required from `requirements.txt` file using command:
+
    `pip install -r requirements.txt`
+
 5. Run the migrations command:
    - `python manage.py makemigrations`
    - `python manage.py migrate`
 6. Create the superuser using command:
    - `python manage.py createsuperuser`
 7. Run the server using command:
+
    `python manage.py runserver`
+
 8. Run from docker compose using command:
    - `docker-compose up --build`
    - `docker-compose up -d --build` (To run in detach mode)
 
 ## Homepage
 
-<p align="center">
+<p>
   <img src="images/homepage.png" width="400" title="hover text">
 </p>
 
 ## Jobs Page
 
-<p align="center">
+<p>
   <img src="images/job-available.png" width="400" title="hover text">
 </p>
 
 ## Job Detail Page
 
-<p align="center">
+<p>
   <img src="images/job-detail-page.png" width="400" title="hover text">
 </p>
