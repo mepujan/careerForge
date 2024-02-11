@@ -9,6 +9,7 @@
 </div>
 <!-- Header End -->
 <!-- end of modal  -->
+{% if profile %}
 <section style="background-color: #eee;">
     <div class="container py-5">
         <div class="row">
@@ -69,5 +70,9 @@
         </div>
     </div>
 </section>
+
+{%else%}
+<p>Please Complete Your Profile.</p>
+{%endif%}
 
 {% endblock content %}
