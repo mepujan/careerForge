@@ -117,8 +117,10 @@ def view_resume(request, id):
     return render(request, '404.html')
 
 
+@login_required()
 def update_profile(request, id):
-    profile = get_object_or_404(Profile, id=id)
+    user = get_object_or_404(User, id=id)
+    profile = get_object_or_404(Profile, user=user)
     form = UpdateProfileForm(instance=profile)
     if request.method == "POST":
         form = UpdateProfileForm(
