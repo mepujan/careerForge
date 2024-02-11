@@ -36,7 +36,17 @@
                     <h4 class="mb-3">Requirements</h4>
                     {{job.requirements | safe}}
                 </div>
-                {% if request.user.role == 'job-seeker'%}
+                {% if request.user.role == 'employer'%}
+                <div class="">
+                    <h4 class="mb-4">Actions</h4>
+                    <a class="btn btn-info" href="{%url 'jobs:update-job' job.id%}">Update</a>
+                    <a href="{% url 'jobs:delete-job' job.id %}" class="btn btn-danger">Delete</a>
+                </div>
+
+
+                {%else%}
+
+
                 <div class="">
                     <h4 class="mb-4">Apply For The Job</h4>
                     {% if not applied %}
@@ -44,12 +54,6 @@
                     {%else%}
                     <button class="btn btn-info" disabled>Already Applied</button>
                     {%endif%}
-                </div>
-                {%else%}
-                <div class="">
-                    <h4 class="mb-4">Actions</h4>
-                    <a class="btn btn-info" href="{%url 'jobs:update-job' job.id%}">Update</a>
-                    <a href="{% url 'jobs:delete-job' job.id %}" class="btn btn-danger">Delete</a>
                 </div>
                 {%endif%}
             </div>
