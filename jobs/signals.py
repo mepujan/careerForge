@@ -1,22 +1,29 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 from .models import JobApplication
+from django.template.loader import get_template
+from asgiref.sync import sync_to_async
 
 
 @receiver(post_save, sender=JobApplication)
+@sync_to_async
 def send_email_to_user(sender, instance, created, **kwargs):
     sender_ = 'gautampujan10@gmail.com'
     receiver_ = [instance.applicant.email]
     if created:
+        job_title = instance.job.title
         subject = "Job Applied Successfully"
-        body = render_to_string('job_applied_mail.html')
-        plain_msg = strip_tags(body)
-        send_mail(subject, plain_msg, sender_, receiver_)
-    else:
-        subject = "Job Status Updated"
-        body = render_to_string('job_status_updated_mail.html')
-        send_mail(subject, 'Job Updated Successfully',
-                  sender_, receiver_)
+        message = "Email Body"
+        body = get_template('job_applied_mail.html')
+        html_content = body.render({
+            'title': job_title
+        })
+        send_mail(
+            subject,
+            message,
+            sender_,
+            receiver_,
+            fail_silently=False,
+            html_message=html_content,
+        )
