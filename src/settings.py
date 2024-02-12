@@ -166,7 +166,8 @@ JAZZMIN_SETTINGS = {
 
 # SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.async.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # or the port your SMTP server uses
 EMAIL_USE_TLS = True  # Set to False if your server uses SSL
